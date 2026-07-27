@@ -2,21 +2,22 @@ import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
 import React from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome6';
 
-const BookCard = ({title, price, authName}) => {
+const BookCard = ({ title, price, authName, imageUrl }) => {
   return (
     <View style={styles.container}>
       {/* Image View */}
       <Image
-        source={{
-          uri: 'https://th.bing.com/th?id=OIF.j%2byFqC8fkCdyDYchlJXjNA&w=324&h=188&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3',
-        }}
+        source={{ uri: imageUrl }}
         style={styles.coverImage}
+        onError={e => console.log('Image Error:', e.nativeEvent.error)}
+        onLoadStart={() => console.log('Loading started')}
+        onLoad={() => console.log('Image loaded successfully')}
       />
       {/*  Book Detials */}
       <View style={styles.detialContainer}>
         <Text style={styles.bookName}>{title}</Text>
         <Text style={styles.authName}>{authName}</Text>
-        <Text style={styles.bookPrice}>{price}</Text>
+        <Text style={styles.bookPrice}>$ {price}</Text>
       </View>
       {/* Delete and Edit Container */}
       <View style={styles.deleteEditContainer}>
@@ -24,7 +25,7 @@ const BookCard = ({title, price, authName}) => {
           <Icon name="trash" size={15} color="#F44336" solid />
         </TouchableOpacity>
         <TouchableOpacity style={styles.circleButton}>
-            <Icon name="pen-to-square" size={15} color= "#2196F3" solid/>
+          <Icon name="pen-to-square" size={15} color="#2196F3" solid />
         </TouchableOpacity>
       </View>
     </View>
@@ -74,16 +75,16 @@ const styles = StyleSheet.create({
   },
   deleteEditContainer: {
     flexDirection: 'row',
-    alignItems: "center",
+    alignItems: 'center',
   },
-  
-  circleButton : {
+
+  circleButton: {
     height: 35,
     width: 35,
     borderRadius: 20,
-    backgroundColor: "#eee",
-    justifyContent: "center",
-    alignItems: "center",
+    backgroundColor: '#eee',
+    justifyContent: 'center',
+    alignItems: 'center',
     marginStart: 8,
-  }
+  },
 });
