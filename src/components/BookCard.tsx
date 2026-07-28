@@ -2,7 +2,21 @@ import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
 import React from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome6';
 
-const BookCard = ({ title, price, authName, imageUrl }) => {
+interface BookBody {
+  title: string;
+  price: string;
+  authName: string;
+  imageUrl: string;
+  onDeleteItem: () => void;
+}
+
+const BookCard = ({
+  title,
+  price,
+  authName,
+  imageUrl,
+  onDeleteItem,
+}: BookBody) => {
   return (
     <View style={styles.container}>
       {/* Image View */}
@@ -21,7 +35,7 @@ const BookCard = ({ title, price, authName, imageUrl }) => {
       </View>
       {/* Delete and Edit Container */}
       <View style={styles.deleteEditContainer}>
-        <TouchableOpacity style={styles.circleButton}>
+        <TouchableOpacity style={styles.circleButton} onPress={onDeleteItem}>
           <Icon name="trash" size={15} color="#F44336" solid />
         </TouchableOpacity>
         <TouchableOpacity style={styles.circleButton}>
