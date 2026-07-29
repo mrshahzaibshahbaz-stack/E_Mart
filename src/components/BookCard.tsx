@@ -8,6 +8,7 @@ interface BookBody {
   authName: string;
   imageUrl: string;
   onDeleteItem: () => void;
+  onEditItem: () => void;
 }
 
 const BookCard = ({
@@ -16,6 +17,7 @@ const BookCard = ({
   authName,
   imageUrl,
   onDeleteItem,
+  onEditItem,
 }: BookBody) => {
   return (
     <View style={styles.container}>
@@ -39,7 +41,13 @@ const BookCard = ({
           <Icon name="trash" size={15} color="#F44336" solid />
         </TouchableOpacity>
         <TouchableOpacity style={styles.circleButton}>
-          <Icon name="pen-to-square" size={15} color="#2196F3" solid />
+          <Icon
+            name="pen-to-square"
+            size={15}
+            color="#2196F3"
+            solid
+            onPress={onEditItem}
+          />
         </TouchableOpacity>
       </View>
     </View>

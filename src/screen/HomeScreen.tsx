@@ -19,6 +19,7 @@ const HomeScreen = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [modalVisible, setModalVisible] = useState(false);
+  const [selectedItem, setSelectedItem] = useState<Book | undefined>(undefined);
 
   const getListOfBooksFN = () => {
     getListOfBooks({
@@ -49,6 +50,11 @@ const HomeScreen = () => {
     });
   };
 
+  const onEditItem = (item: Book) => {
+    setModalVisible(true);
+    setSelectedItem(item);
+  };
+
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <FlatList
@@ -61,12 +67,22 @@ const HomeScreen = () => {
             authName={item.name_of_author}
             imageUrl={item.cover}
             onDeleteItem={() => onDeleteItem(item)}
+            onEditItem={() => onEditItem(item)}
           />
         )}
       />
-      <AddButton onPress={() => setModalVisible(true)} />
+      <AddButton
+        onPress={() => {
+          setModalVisible(true);
+          setSelectedItem({});
+        }}
+      />
       <Modal visible={modalVisible} animationType="slide">
-        <AddBookScreen onCloseIconPress={() => setModalVisible(false)} />
+        <AddBookScreen
+          onCloseIconPress={() => setModalVisible(false)}
+          onCreateSuccess={() => getListOfBooksFN()}
+          selectedItem={selectedItem}
+        />
       </Modal>
     </SafeAreaView>
   );
