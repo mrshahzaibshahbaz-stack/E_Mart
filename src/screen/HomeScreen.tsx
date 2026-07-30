@@ -74,7 +74,7 @@ const HomeScreen = () => {
       <AddButton
         onPress={() => {
           setModalVisible(true);
-          setSelectedItem({});
+          setSelectedItem(undefined);
         }}
       />
       <Modal visible={modalVisible} animationType="slide">
