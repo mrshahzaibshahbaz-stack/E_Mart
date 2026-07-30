@@ -2,6 +2,8 @@ import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
 import React from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome6';
 
+const PLACEHOLDER_IMAGE = 'https://via.placeholder.com/150x200?text=No+Cover';
+
 interface BookBody {
   title: string;
   price: string;
@@ -23,7 +25,7 @@ const BookCard = ({
     <View style={styles.container}>
       {/* Image View */}
       <Image
-        source={{ uri: imageUrl }}
+        source={{ uri: imageUrl && imageUrl.trim() !== '' ? imageUrl : PLACEHOLDER_IMAGE }}
         style={styles.coverImage}
         onError={e => console.log('Image Error:', e.nativeEvent.error)}
         onLoadStart={() => console.log('Loading started')}
